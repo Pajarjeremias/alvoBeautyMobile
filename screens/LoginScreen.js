@@ -13,7 +13,7 @@ export default function LoginScreen({ navigation }) {
           <Text style={styles.title}>Kirjaudu sisään</Text>
           <TextInput placeholder="Sähköposti" style={styles.input} />
           <TextInput placeholder="Salasana" style={styles.input} secureTextEntry />
-          <Button title="Kirjaudu" onPress={handleLogin} />
+          <Button title="Kirjaudu" onPress={handleLogin} color="#5C4033" />
         </View>
       );
     }
@@ -21,20 +21,19 @@ export default function LoginScreen({ navigation }) {
     const styles = StyleSheet.create({
       container: {
         flex: 1,
-        padding: 24,
-        justifyContent: 'center',
+        padding: 20,
+        backgroundColor: '#E6D3B3'
       },
       title: {
-        fontSize: 28,
-        marginBottom: 24,
+        fontSize: 30,
+        marginBottom: 25,
         textAlign: 'center',
       },
       input: {
         height: 50,
-        borderColor: '#ccc',
-        borderWidth: 1,
-        marginBottom: 16,
-        paddingHorizontal: 12,
-        borderRadius: 6,
+        borderColor: '#FFFFFF',
+        borderWidth: 3,
+        marginBottom: 20,
+        borderRadius: 10,
       },
     });

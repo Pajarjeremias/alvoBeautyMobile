@@ -5,7 +5,7 @@ export default function ServiceScreen() {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Palvelut</Text>
-      <Text>Tuotesivu tehdään kun ehditään</Text>
+      <Text style={styles.text}>This site is under construction...</Text>
     </View>
   );
 }
@@ -13,12 +13,19 @@ export default function ServiceScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 24,
-    justifyContent: 'center',
+    padding: 25,
     alignItems: 'center',
+    backgroundColor: '#E6D3B3',
+    fontSize: 25,
   },
   title: {
-    fontSize: 24,
-    marginBottom: 16,
+    fontSize: 30,
+    marginBottom: 25,
+    fontWeight: 'bold',
   },
+  text: {
+    fontSize: 20,
+    marginBottom: 50,
+    textAlign: 'center',
+},
 });

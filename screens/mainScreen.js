@@ -4,13 +4,18 @@ import { View, Text, Button, StyleSheet } from 'react-native';
 export default function MainScreen({ navigation}) {
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Tervetuloa AlvoBeautyn sovellukseen!</Text>
+      <Text style={styles.title}>Tervetuloa AlvoBeautyn mobiili -sovellukseen!</Text>
       <Text style={styles.text}>
-        Täältä löydät palvelut ja tarjoukset.
+        Täältä löydät asiantuntevan kauneudenhoitoalan henkilökunnan.
+      </Text>
+      <Text style={styles.text}>
+        Siirry alla olevasta painikkeesta palveluihin ja tutki löytyykö juuri sinulle olevia tarjouksia.
       </Text>
       <Button
         title="Siirry palveluihin"
-        onPress={() => navigation.navigate('Palvelut')}
+        color="#5C4033"
+        onPress={() => navigation.navigate('Palvelut')
+        }
       />
     </View>
   );
@@ -19,19 +24,19 @@ export default function MainScreen({ navigation}) {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        padding: 24,
-        justifyContent: 'center',
+        padding: 25,
         alignItems: 'center',
+        backgroundColor: '#E6D3B3'
       },
       title: {
         fontSize: 26,
         fontWeight: 'bold',
-        marginBottom: 16,
+        marginBottom: 30,
         textAlign: 'center',
       },
       text: {
-        fontSize: 16,
-        marginBottom: 24,
+        fontSize: 15,
+        marginBottom: 50,
         textAlign: 'center',
 },
 });
