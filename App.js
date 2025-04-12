@@ -4,6 +4,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import MainScreen from './screens/mainScreen';
 import LoginScreen from './screens/LoginScreen';
 import ServiceScreen from './screens/ServiceScreen';
+import ServiceAddScreen from './screens/ServiceAddScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -14,6 +15,7 @@ export default function App() {
         <Stack.Screen name="Sisäänkirjautuminen" component={LoginScreen} />
         <Stack.Screen name="Etusivu" component={MainScreen} />
         <Stack.Screen name="Palvelut" component={ServiceScreen} />
+        <Stack.Screen name="Lisää palvelu" component={ServiceAddScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );

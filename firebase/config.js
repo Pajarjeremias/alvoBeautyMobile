@@ -1,6 +1,4 @@
-
 import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
 
 const firebaseConfig = {
     apiKey: "AIzaSyDM-j5gXWzCPxAHg34uVtbltAFepjE3Mmo",
@@ -9,8 +7,9 @@ const firebaseConfig = {
     storageBucket: "abauth-2a53b.firebasestorage.app",
     messagingSenderId: "606854643095",
     appId: "1:606854643095:web:92c74909150ef746ed98d2",
-    measurementId: "G-G8M27M2HTC"
+    measurementId: "G-G8M27M2HTC",
+    storageBucket: 'abauth-2a53b.firebasestorage.app'
 };
 
-const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
+export const app = initializeApp(firebaseConfig);
+

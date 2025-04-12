@@ -1,31 +1,90 @@
-import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { View, Text, FlatList, StyleSheet, Button } from 'react-native';
+import { app } from '../firebase/config';
+import { getDatabase, ref, onValue } from 'firebase/database';
 
-export default function ServiceScreen() {
+const db = getDatabase(app);
+
+export default function ServiceScreen({ navigation}) {
+  const [palvelut, setPalvelut] = useState([]);
+
+  useEffect(() => {
+    const palvelutRef = ref(db, 'kohde/');
+    onValue(palvelutRef, (snapshot) => {
+      const data = snapshot.val();
+      if (data) {
+        setPalvelut(Object.values(data));
+      } else {
+        setPalvelut([]);
+      }
+    });
+  }, []);
+
+  const renderKohde = ({ item }) => (
+    <View style={tyylit.kohde}>
+      <Text style={tyylit.nimi}>{item.nimi}</Text>
+      <Text style={tyylit.hinta}>alk. {item.hinta} €</Text>
+    </View>
+  );
+
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Palvelut</Text>
-      <Text style={styles.text}>This site is under construction...</Text>
+    <View style={tyylit.kontti}>
+      <View style={tyylit.ylaosa}>
+      <Text style={tyylit.otsikko}>Palvelut</Text>
+      <Button style={tyylit.painike}
+              title="Lisää palvelu"
+              color="#5C4033"
+              onPress={() => navigation.navigate('Lisää palvelu')
+              }
+            />
+          </View>
+      <FlatList
+        data={palvelut}
+        keyExtractor={(item) => item.id}
+        renderItem={renderKohde}
+      />
     </View>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
+const tyylit = StyleSheet.create({
+  kontti: {
     flex: 1,
     padding: 25,
-    alignItems: 'center',
     backgroundColor: '#E6D3B3',
-    fontSize: 25,
   },
-  title: {
+  ylaosa: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginBottom: 20,
+
+  },
+  otsikko: {
     fontSize: 30,
-    marginBottom: 25,
+    marginBottom: 20,
     fontWeight: 'bold',
-  },
-  text: {
-    fontSize: 20,
-    marginBottom: 50,
     textAlign: 'center',
-},
+  },
+  painike: {
+    fontSize: 10,
+    width: 80,
+  },
+  kohde: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    padding: 10,
+    backgroundColor: "#F9F3E7",
+    borderRadius: 20,
+    marginTop: 10,
+  },
+  nimi: {
+    fontSize: 20,
+    fontWeight: '400',
+  },
+  hinta: {
+    fontSize: 16,
+    color: '#5C4033',
+  },
+  
 });
