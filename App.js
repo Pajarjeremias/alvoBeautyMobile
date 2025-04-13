@@ -5,6 +5,7 @@ import MainScreen from './screens/mainScreen';
 import LoginScreen from './screens/LoginScreen';
 import ServiceScreen from './screens/ServiceScreen';
 import ServiceAddScreen from './screens/ServiceAddScreen';
+import SignUpScreen from './screens/SignUpScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -13,9 +14,11 @@ export default function App() {
     <NavigationContainer>
       <Stack.Navigator>
         <Stack.Screen name="Sisäänkirjautuminen" component={LoginScreen} />
+        <Stack.Screen name="Rekisteröidy" component={SignUpScreen} />
         <Stack.Screen name="Etusivu" component={MainScreen} />
         <Stack.Screen name="Palvelut" component={ServiceScreen} />
         <Stack.Screen name="Lisää palvelu" component={ServiceAddScreen} />
+        
       </Stack.Navigator>
     </NavigationContainer>
   );

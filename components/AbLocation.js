@@ -15,15 +15,15 @@ export default function AbLocation(){
       };
     
       return (
-        <View style={styles.container}>
-          <MapView style={styles.map} initialRegion={targetLocation}>
+        <View style={tyylit.kontti}>
+          <MapView style={tyylit.kartta} initialRegion={targetLocation}>
             <Marker
               coordinate={targetLocation}
               title="Alvo Beauty"
             />
           </MapView>
 
-          <View style={styles.button}>
+          <View style={tyylit.painike}>
             <Button
             title='Tästä reittiohjeisiin'
             onPress={openLocation}
@@ -34,17 +34,17 @@ export default function AbLocation(){
       );
     }
     
-    const styles = StyleSheet.create({
-      container: {
+    const tyylit = StyleSheet.create({
+      kontti: {
         height: 350,
         width: '100%',
         marginTop: 25,
       },
-      map: {
+      kartta: {
         width: '100%',
         height: '70%',
       },
-      button: {
+      painike: {
         marginTop: 10,
       },
     });

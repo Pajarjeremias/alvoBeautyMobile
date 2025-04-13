@@ -18,13 +18,13 @@ export default function ServiceAddScreen() {
     if (palvelu.hinta && palvelu.nimi) {
     push(ref(db, 'kohde/'), palvelu);
     } else {
-      Alert.alert('Virhe ilmoitus: ', 'Kirjoita palvelu ja hinta')
+      Alert.alert("Virhe ilmoitus: Kirjoita palvelu ja hinta")
     }
   }
 
 
   return (  
-    <View style={styles.container}>
+    <View style={tyylit.kontti}>
       <TextInput 
         placeholder='Palvelun nimi' 
         onChangeText={text => setPalvelu({...palvelu, nimi: text})}
@@ -38,8 +38,8 @@ export default function ServiceAddScreen() {
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
+const tyylit = StyleSheet.create({
+  kontti: {
     flex: 1,
     padding: 25,
     alignItems: 'center',

@@ -20,7 +20,7 @@ export default function ServiceScreen({ navigation}) {
     });
   }, []);
 
-  const renderKohde = ({ item }) => (
+  const handleTarget = ({ item }) => (
     <View style={tyylit.kohde}>
       <Text style={tyylit.nimi}>{item.nimi}</Text>
       <Text style={tyylit.hinta}>alk. {item.hinta} €</Text>
@@ -41,7 +41,7 @@ export default function ServiceScreen({ navigation}) {
       <FlatList
         data={palvelut}
         keyExtractor={(item) => item.id}
-        renderItem={renderKohde}
+        renderItem={handleTarget}
       />
     </View>
   );
