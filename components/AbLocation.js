@@ -42,9 +42,10 @@ export default function AbLocation(){
       },
       kartta: {
         width: '100%',
-        height: '70%',
+        height: '80%',
       },
       painike: {
         marginTop: 10,
+        width: '100%'
       },
     });

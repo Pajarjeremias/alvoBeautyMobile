@@ -6,6 +6,9 @@ import LoginScreen from './screens/LoginScreen';
 import ServiceScreen from './screens/ServiceScreen';
 import ServiceAddScreen from './screens/ServiceAddScreen';
 import SignUpScreen from './screens/SignUpScreen';
+import AbWebView from './components/AbWebView';
+import Toast from 'react-native-toast-message';
+import AbAboutUsWebView from './components/AbAboutUsWebView';
 
 const Stack = createNativeStackNavigator();
 
@@ -18,8 +21,10 @@ export default function App() {
         <Stack.Screen name="Etusivu" component={MainScreen} />
         <Stack.Screen name="Palvelut" component={ServiceScreen} />
         <Stack.Screen name="Lisää palvelu" component={ServiceAddScreen} />
-        
+        <Stack.Screen name="Alvo Beautyn varaus järjestelmä Timma" component={AbWebView} />
+        <Stack.Screen name="Meistä" component={AbAboutUsWebView} />
       </Stack.Navigator>
+      <Toast />
     </NavigationContainer>
   );
 }

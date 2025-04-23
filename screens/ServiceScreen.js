@@ -34,13 +34,13 @@ export default function ServiceScreen({ navigation}) {
       <Button style={tyylit.painike}
               title="Lisää palvelu"
               color="#5C4033"
-              onPress={() => navigation.navigate('Lisää palvelu')
-              }
-            />
+              onPress={() => navigation.navigate('Lisää palvelu')}/>
           </View>
       <FlatList
         data={palvelut}
-        keyExtractor={(item) => item.id}
+        KeyExtractor={(item) => {
+          return item.id;
+        }}
         renderItem={handleTarget}
       />
     </View>

@@ -1,18 +1,39 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, Button, StyleSheet, Alert, Image } from 'react-native';
+import { View, Text, TextInput, Button, StyleSheet,  Image } from 'react-native';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../firebase/config';
+import Toast from 'react-native-toast-message';
 
 export default function LoginScreen({ navigation }) {
   const [sposti, setSposti] = useState('');
   const [salasana, setSalasana] = useState('');
 
+  const successToast = () => {
+    Toast.show({
+      type: 'success',
+      text1: 'Sisäänkirjautuminen onnistui !',
+      text2: 'Tervetuloa Alvo Beautyn mobiili sovellukseen.',
+      position: 'top',
+      visibilityTime: 4500,
+    });
+  }
+  const denyToast = () => {
+    Toast.show({
+      type: 'error',
+      text1: 'Ongelma sisäänkirjautumisessa !',
+      text2: 'Kokeile uudelleen',
+      position: 'top',
+      visibilityTime: 4500,
+    });
+  }
+
   const handleLogin = async () => {
     try {
       await signInWithEmailAndPassword(auth, sposti, salasana);
+      successToast();
       navigation.replace('Etusivu');
     } catch (error) {
-      Alert.alert("Virhe", error.message);
+      denyToast();
     }
   };
 
@@ -37,16 +58,14 @@ export default function LoginScreen({ navigation }) {
       />
 
       <View style={tyylit.painikeet}>
-      <Button title="Kirjaudu"
-       onPress={handleLogin}
-       color="#5C4033"
-        />
-
       <Button title="Luo uusi käyttäjä"
       onPress={() => navigation.navigate('Rekisteröidy')}
       color="#5C4033"
        />
-
+       <Button title="Kirjaudu"
+       onPress={handleLogin}
+       color="#5C4033"
+        />
       </View>
 
       <Image

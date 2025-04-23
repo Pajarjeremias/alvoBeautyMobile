@@ -1,39 +1,71 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, TextInput, Button, Alert } from 'react-native';
+import { View, StyleSheet, TextInput, Button, Image } from 'react-native';
 import { app } from '../firebase/config';
 import { getDatabase, ref, push } from 'firebase/database';
+import Toast from 'react-native-toast-message';
 
 const db = getDatabase(app);
 
-export default function ServiceAddScreen() {
+export default function ServiceAddScreen({}) {
 
   const [palvelu, setPalvelu] = useState({
     nimi: '',
     hinta: ''
   });
-  const [kohde, setKohde] = useState([]);
+
+  const successToast = () => {
+    Toast.show({
+      type: 'success',
+      text1: 'Tuotteen lisääminen onnistui !',
+      text2: 'Lisää lisää tuotteita',
+      position: 'top',
+      visibilityTime: 4000,
+    });
+  }
+  const denyToast = () => {
+    Toast.show({
+      type: 'error',
+      text1: 'Ongelma tuotten lisäyksessä !',
+      text2: 'Kokeile uudelleen',
+      position: 'top',
+      visibilityTime: 4000,
+    });
+  }
 
 
   const handleSave = () => {
     if (palvelu.hinta && palvelu.nimi) {
-    push(ref(db, 'kohde/'), palvelu);
-    } else {
-      Alert.alert("Virhe ilmoitus: Kirjoita palvelu ja hinta")
+      push(ref(db, 'kohde/'), palvelu)
+      .then(() => successToast());
+      } else {
+        denyToast();
+      }
     }
-  }
 
 
   return (  
     <View style={tyylit.kontti}>
-      <TextInput 
-        placeholder='Palvelun nimi' 
-        onChangeText={text => setPalvelu({...palvelu, nimi: text})}
-        value={palvelu.nimi}/>  
-      <TextInput 
-        placeholder='hinta' 
-        onChangeText={text => setPalvelu({...palvelu, hinta: text})}
-        value={palvelu.hinta}/>   
-      <Button onPress={handleSave} title="Talenna" /> 
+
+    <TextInput 
+      placeholder='Palvelun nimi' 
+      onChangeText={text => setPalvelu({...palvelu, nimi: text})}
+      value={palvelu.nimi}
+      style={tyylit.syote}/>
+
+    <TextInput 
+      placeholder='Hinta' 
+      onChangeText={text => setPalvelu({...palvelu, hinta: text})}
+      value={palvelu.hinta}
+      style={tyylit.syote}/>
+
+      <View style={tyylit.tallenna}>
+      <Button onPress={handleSave} title="Tallenna" color="#5C4033" />
+      </View>
+
+      <Image
+        source={require('../assets/absalon.jpg')}
+        style={tyylit.logo}/>
+
     </View>
   );
 }
@@ -46,14 +78,26 @@ const tyylit = StyleSheet.create({
     backgroundColor: '#E6D3B3',
     fontSize: 25,
   },
-  title: {
-    fontSize: 30,
-    marginBottom: 25,
-    fontWeight: 'bold',
+  syote: {
+    height: 50,
+    width: '80%',
+    borderColor: '#FFFFFF',
+    borderWidth: 2,
+    borderRadius: 10,
+    fontSize: 18,
+    backgroundColor: '#fff',
+    marginBottom: 20,
   },
-  text: {
-    fontSize: 20,
-    marginBottom: 50,
-    textAlign: 'center',
+tallenna: {
+  width: '80%',
+  fontSize: 18,
+},
+logo: {
+  width: 350,
+  height: 350,
+  alignSelf: 'center',
+  marginTop: 70,
+  borderRadius: 75
+
 },
 });

@@ -2,18 +2,38 @@ import React, { useState } from 'react';
 import { View, Text, TextInput, Button, StyleSheet, Alert } from 'react-native';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../firebase/config';
+import Toast from 'react-native-toast-message';
 
 export default function SignUpScreen({ navigation }) {
     const [sposti, setSposti] = useState('');
     const [salasana, setSalasana] = useState('');
 
+    const successToast = () => {
+        Toast.show({
+          type: 'success',
+          text1: 'Käyttäjän luonti onnistui !',
+          text2: 'Jatka sisäänkirjautumiseen',
+          position: 'top',
+          visibilityTime: 4000,
+        });
+      }
+      const denyToast = () => {
+        Toast.show({
+          type: 'error',
+          text1: 'Ongelma käyttäjän luomisessa !',
+          text2: 'Kokeile uudelleen',
+          position: 'top',
+          visibilityTime: 4000,
+        });
+      }
+
     const handleSignUp = async () => {
         try {
             await createUserWithEmailAndPassword(auth, sposti, salasana);
-            Alert.alert("Käyttäjä luotu onnistuneesti !");
+            successToast();
             navigation.replace('Sisäänkirjautuminen');
         } catch (error) {
-            Alert.alert("Virhe: ", error.message);
+            denyToast();
         }
     };
 
