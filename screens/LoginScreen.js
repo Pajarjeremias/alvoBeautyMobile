@@ -31,7 +31,7 @@ export default function LoginScreen({ navigation }) {
     try {
       await signInWithEmailAndPassword(auth, sposti, salasana);
       successToast();
-      navigation.replace('Etusivu');
+      navigation.replace('Alvo Beauty');
     } catch (error) {
       denyToast();
     }
@@ -60,11 +60,11 @@ export default function LoginScreen({ navigation }) {
       <View style={tyylit.painikeet}>
       <Button title="Luo uusi käyttäjä"
       onPress={() => navigation.navigate('Rekisteröidy')}
-      color="#5C4033"
+      color="#D9A084"
        />
        <Button title="Kirjaudu"
        onPress={handleLogin}
-       color="#5C4033"
+       color="#D9A084"
         />
       </View>
 
@@ -81,7 +81,7 @@ const tyylit = StyleSheet.create({
   kontti: {
     flex: 1,
     padding: 20,
-    backgroundColor: '#E6D3B3'
+    backgroundColor: '#F4EAE1'
   },
   otsikko: {
     fontSize: 30,

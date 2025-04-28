@@ -59,7 +59,7 @@ export default function ServiceAddScreen({}) {
       style={tyylit.syote}/>
 
       <View style={tyylit.tallenna}>
-      <Button onPress={handleSave} title="Tallenna" color="#5C4033" />
+      <Button onPress={handleSave} title="Tallenna" color="#D9A084" />
       </View>
 
       <Image
@@ -75,7 +75,7 @@ const tyylit = StyleSheet.create({
     flex: 1,
     padding: 25,
     alignItems: 'center',
-    backgroundColor: '#E6D3B3',
+    backgroundColor: '#F4EAE1',
     fontSize: 25,
   },
   syote: {

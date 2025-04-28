@@ -27,7 +27,7 @@ export default function AbLocation(){
             <Button
             title='Tästä reittiohjeisiin'
             onPress={openLocation}
-            color="#5C4033"
+            color="#D9A084"
             />
           </View>
         </View>
@@ -38,14 +38,14 @@ export default function AbLocation(){
       kontti: {
         height: 350,
         width: '100%',
-        marginTop: 25,
+        marginTop: 17,
       },
       kartta: {
         width: '100%',
         height: '80%',
       },
       painike: {
-        marginTop: 10,
+        marginTop: 15,
         width: '100%'
       },
     });

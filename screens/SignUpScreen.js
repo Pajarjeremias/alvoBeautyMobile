@@ -53,7 +53,7 @@ export default function SignUpScreen({ navigation }) {
             value={salasana}
             onChangeText={setSalasana}
           />
-          <Button title="Rekisteröidy" onPress={handleSignUp} color="#5C4033" />
+          <Button title="Rekisteröidy" onPress={handleSignUp} color="#D9A084" />
         </View>
       );
     }
@@ -62,7 +62,7 @@ export default function SignUpScreen({ navigation }) {
       kontti: {
         flex: 1,
         padding: 20,
-        backgroundColor: '#E6D3B3',
+        backgroundColor: '#F4EAE1',
         justifyContent: 'center',
       },
       otsikko: {

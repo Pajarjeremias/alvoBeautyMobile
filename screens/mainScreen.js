@@ -5,7 +5,7 @@ import { signOut } from 'firebase/auth';
 import { auth } from '../firebase/config';
 import Toast from 'react-native-toast-message';
 
-export default function MainScreen({ navigation}) {
+export default function MainScreen({ navigation }) {
 
   const successToast = () => {
       Toast.show({
@@ -38,34 +38,15 @@ export default function MainScreen({ navigation}) {
 
   return (
     <View style={tyylit.kontti}>
-      <View style={tyylit.header}>
-      <View style={tyylit.uloskirjautuminen}>
-        <Button title="Kirjaudu ulos" onPress={handleSignOut} color="#A52A2A" />
-      </View>
-      <View style={tyylit.meistä}>
-        <Button
-        title='Tietoa meistä'
-        color="#5C4033"
-        onPress={() => navigation.navigate('Meistä')} />
-      </View>
-      </View>
+      
       <Text style={tyylit.otsikko}>Tervetuloa AlvoBeautyn mobiili -sovellukseen!</Text>
       <Text style={tyylit.teksti}>
         Alta löydät Alvo Beautyn palvelut sekä ajanvarauksen Timma sovelluksen kautta.
       </Text>
-      <View style={tyylit.painikeKontti}>
-      <Button
-        title="Palveluihin"
-        color="#5C4033"
-        onPress={() => navigation.navigate('Palvelut')} 
-        />
-      <Button
-        title='Ajanvaraukseen'
-        color="#5C4033"
-        onPress={() => navigation.navigate('Alvo Beautyn varaus järjestelmä Timma')}
-        />
-        </View>
     <AbLocation />
+    <View style={tyylit.uloskirjautuminen}>
+        <Button title="Kirjaudu ulos" onPress={handleSignOut} color="#A52A2A" />
+      </View>
     </View>
     
   );
@@ -76,7 +57,7 @@ const tyylit = StyleSheet.create({
         flex: 1,
         padding: 20,
         alignItems: 'center',
-        backgroundColor: '#E6D3B3'
+        backgroundColor: '#F4EAE1'
       },
       otsikko: {
         fontSize: 25,
@@ -86,19 +67,9 @@ const tyylit = StyleSheet.create({
       },
       teksti: {
         fontSize: 18,
-        marginBottom: 15,
         textAlign: 'center',
       },
-      header: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        width: '100%',
-        marginBottom: 20,
-      },
-      painikeKontti: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        width: '100%',
-      },
+      uloskirjautuminen: {
+        alignItems: 'flex-end',
+      }
     });

@@ -1,11 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, FlatList, StyleSheet, Button } from 'react-native';
-import { app } from '../firebase/config';
+import { app, auth } from '../firebase/config';
 import { getDatabase, ref, onValue } from 'firebase/database';
 
 const db = getDatabase(app);
 
+const ADMIN_UID = '3vrZoXc0oWYxOKs0VL8QbArecw02';
+
 export default function ServiceScreen({ navigation}) {
+  const currentUser = auth.currentUser;
+  const isAdmin = currentUser && currentUser.uid === ADMIN_UID;
+
   const [palvelut, setPalvelut] = useState([]);
 
   useEffect(() => {
@@ -31,11 +36,13 @@ export default function ServiceScreen({ navigation}) {
     <View style={tyylit.kontti}>
       <View style={tyylit.ylaosa}>
       <Text style={tyylit.otsikko}>Palvelut</Text>
-      <Button style={tyylit.painike}
-              title="Lisää palvelu"
-              color="#5C4033"
-              onPress={() => navigation.navigate('Lisää palvelu')}/>
-          </View>
+      {isAdmin &&(
+        <Button style={tyylit.painike}
+          title="Lisää palvelu"
+          color="#D9A084"
+          onPress={() => navigation.navigate('Lisää palvelu')}/>
+        )}
+      </View>
       <FlatList
         data={palvelut}
         KeyExtractor={(item) => {
@@ -51,7 +58,7 @@ const tyylit = StyleSheet.create({
   kontti: {
     flex: 1,
     padding: 25,
-    backgroundColor: '#E6D3B3',
+    backgroundColor: '#F4EAE1',
   },
   ylaosa: {
     flexDirection: 'row',
@@ -74,7 +81,7 @@ const tyylit = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     padding: 10,
-    backgroundColor: "#F9F3E7",
+    backgroundColor: "#F5F2E",
     borderRadius: 20,
     marginTop: 10,
   },
