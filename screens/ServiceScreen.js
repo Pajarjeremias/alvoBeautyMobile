@@ -1,13 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { View, Text, FlatList, StyleSheet, Button } from 'react-native';
 import { app, auth } from '../firebase/config';
 import { getDatabase, ref, onValue } from 'firebase/database';
 
 const db = getDatabase(app);
 
-const ADMIN_UID = '3vrZoXc0oWYxOKs0VL8QbArecw02';
+const ADMIN_UID = '14xCcLTqpoV2dGVz9ZrSfOr6P5U2';
 
-export default function ServiceScreen({ navigation}) {
+export default function ServiceScreen({ navigation }) {
   const currentUser = auth.currentUser;
   const isAdmin = currentUser && currentUser.uid === ADMIN_UID;
 

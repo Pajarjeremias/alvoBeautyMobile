@@ -1,4 +1,3 @@
-import React from 'react';
 import { View, Text, Button, StyleSheet } from 'react-native';
 import AbLocation from '../components/AbLocation';
 import { signOut } from 'firebase/auth';
@@ -41,7 +40,7 @@ export default function MainScreen({ navigation }) {
       
       <Text style={tyylit.otsikko}>Tervetuloa AlvoBeautyn mobiili -sovellukseen!</Text>
       <Text style={tyylit.teksti}>
-        Alta löydät Alvo Beautyn palvelut sekä ajanvarauksen Timma sovelluksen kautta.
+        Alta löydät Alvo Beautyn sijainnin ja vasemmasta yläreunan valikosta muita sovelluksen toimintoja.
       </Text>
     <AbLocation />
     <View style={tyylit.uloskirjautuminen}>

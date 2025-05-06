@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { View, StyleSheet, TextInput, Button, Image } from 'react-native';
 import { app } from '../firebase/config';
 import { getDatabase, ref, push } from 'firebase/database';
