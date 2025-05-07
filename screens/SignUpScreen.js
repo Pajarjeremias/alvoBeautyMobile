@@ -31,7 +31,7 @@ export default function SignUpScreen({ navigation }) {
         try {
             await createUserWithEmailAndPassword(auth, sposti, salasana);
             successToast();
-            navigation.replace('Sisäänkirjautuminen');
+            navigation.replace('Alvo Beauty');
         } catch (error) {
             denyToast();
         }

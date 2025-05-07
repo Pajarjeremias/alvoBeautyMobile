@@ -9,7 +9,7 @@ const ADMIN_UID = '14xCcLTqpoV2dGVz9ZrSfOr6P5U2';
 
 export default function ServiceScreen({ navigation }) {
   const currentUser = auth.currentUser;
-  const isAdmin = currentUser && currentUser.uid === ADMIN_UID;
+  const isAdmin = currentUser.uid === ADMIN_UID;
 
   const [palvelut, setPalvelut] = useState([]);
 
@@ -25,13 +25,6 @@ export default function ServiceScreen({ navigation }) {
     });
   }, []);
 
-  const handleTarget = ({ item }) => (
-    <View style={tyylit.kohde}>
-      <Text style={tyylit.nimi}>{item.nimi}</Text>
-      <Text style={tyylit.hinta}>alk. {item.hinta} €</Text>
-    </View>
-  );
-
   return (
     <View style={tyylit.kontti}>
       <View style={tyylit.ylaosa}>
@@ -44,12 +37,12 @@ export default function ServiceScreen({ navigation }) {
         )}
       </View>
       <FlatList
-        data={palvelut}
-        KeyExtractor={(item) => {
-          return item.id;
-        }}
-        renderItem={handleTarget}
-      />
+        renderItem={({ item }) =>
+          <View style={tyylit.kohde}>
+            <Text style={tyylit.nimi}>{item.nimi}</Text>
+            <Text style={tyylit.hinta}>alk. {item.hinta} €</Text>
+          </View>} 
+          data={palvelut} />
     </View>
   );
 }

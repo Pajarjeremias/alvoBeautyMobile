@@ -6,7 +6,7 @@ import Toast from 'react-native-toast-message';
 
 const db = getDatabase(app);
 
-export default function ServiceAddScreen({}) {
+export default function ServiceAddScreen() {
 
   const [palvelu, setPalvelu] = useState({
     nimi: '',
