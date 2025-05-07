@@ -12,7 +12,7 @@ export default function MainScreen({ navigation }) {
         text1: 'Ulos kirjautuminen onnistui !',
         text2: 'Kiitos kun kävit, nähdään taas <3',
         position: 'top',
-        visibilityTime: 4500,
+        visibilityTime: 4000,
       });
     }
     const denyToast = () => {
@@ -21,7 +21,7 @@ export default function MainScreen({ navigation }) {
         text1: 'Ongelma ulos kirjautumisessa !',
         text2: 'Kokeile uudelleen',
         position: 'top',
-        visibilityTime: 4500,
+        visibilityTime: 4000,
       });
     }
 
@@ -37,7 +37,6 @@ export default function MainScreen({ navigation }) {
 
   return (
     <View style={tyylit.kontti}>
-      
       <Text style={tyylit.otsikko}>Tervetuloa AlvoBeautyn mobiili -sovellukseen!</Text>
       <Text style={tyylit.teksti}>
         Alta löydät Alvo Beautyn sijainnin ja vasemmasta yläreunan valikosta muita sovelluksen toimintoja.
