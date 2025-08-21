@@ -1,4 +1,4 @@
-# Käytety teknologiat
+# Käytetyt teknologiat
 
 ## Drawer & Stack navigaatio
 
