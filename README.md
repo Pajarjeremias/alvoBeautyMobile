@@ -29,42 +29,53 @@ Firebasen käyttäjä autentikointi, huono puoli ettei tue käyttäjätunnuksell
 Yksi Firebasen monista tietokanta malleista, tähän pystyy päivittämään tiedot niin että ne ei poistu aina kun sovelluksesta poistuu
 
 ```mermaid
+flowchart TB
+    subgraph RN ["React Native App (Expo)"]
+      UI["User Interface"]
+      SQ["Local Storage (Expo SQLite)"]
+      RQ["React Query (Axios)"]
+      CAM["Camera / Image Picker"]
+      UI --> CAM
+      UI --> RQ
+      UI --> SQ
+    end
+
+    subgraph API ["Backend (FastAPI, Python, Rahti)"]
+      INFER["Machine Learning Inference (PyTorch)"]
+      DB[("SQLite Database")]
+    end
+
+    CAM -->|Image Upload| RQ
+    RQ -->|HTTPS POST| API
+    API --> INFER
+    API --> DB
+    API -->|JSON Response| RQ
+    RQ --> SQ
+
+
+```
+````mermaid
 sequenceDiagram
     autonumber
 
-    participant U as Käyttäjä
-    participant FE as Expo Frontend (Mobile)
-    participant BE as FastAPI Backend (Rahti)
-    participant AI as AI_Model (open_clip + torch)
-    participant DB as SQLite /workspace/varustevahti.db
+    participant User as User
+    participant App as React Native App (Expo)
+    participant CAM as Camera / Image Picker
+    participant API as FastAPI Backend (Rahti)
+    participant ML as ML Inference (PyTorch)
+    participant DB as SQLite Database
 
-    %% --- Normaali CRUD ---
-    U ->> FE: Käyttäjä avaa sovelluksen
-    FE ->> BE: GET /items/
-    BE ->> DB: Hae kaikki itemit
-    DB -->> BE: Item-lista
-    BE -->> FE: 200 OK + JSON
-    FE -->> U: Näyttää listan
+    User->>App: Opens "Add Item" screen
+    App->>CAM: Launch camera / image picker
+    CAM-->>App: Returns selected image
 
-    %% --- Uuden itemin lisäys ---
-    U ->> FE: Täyttää itemin tiedot
-    FE ->> BE: POST /items/
-    BE ->> DB: Lisää uusi item
-    DB -->> BE: OK
-    BE -->> FE: 200 OK
+    App->>API: POST /upload-image\n(multipart/form-data)
+    API->>ML: Run inference on image
+    ML-->>API: Predicted item result
 
-    %% --- Kuvantunnistus (items/auto) ---
-    U ->> FE: Valitsee kuvan (kamera / galleria)
-    FE ->> BE: POST /items/auto (multipart image)
+    API->>DB: Save item + recognition history
+    DB-->>API: Confirm save
 
-    BE ->> AI: Aktivoi open_clip -mallin<br>Kirjoittaa cacheen /workspace/.cache/torch
-    AI ->> AI: Suorittaa mallin inferenssin
-    AI -->> BE: Ennuste (category, gear-type)
-
-    BE ->> DB: Tallentaa automaattisesti luodut tiedot
-    DB -->> BE: OK
-    BE -->> FE: 200 OK + ennustettu data
-
-    FE -->> U: Näyttää automaattisesti tunnistetun varusteen
-
+    API-->>App: JSON response\n(prediction + item data)
+    App-->>User: Displays item info\nand stores local history (SQLite)
 ```
