@@ -28,6 +28,7 @@ Firebasen käyttäjä autentikointi, huono puoli ettei tue käyttäjätunnuksell
 
 Yksi Firebasen monista tietokanta malleista, tähän pystyy päivittämään tiedot niin että ne ei poistu aina kun sovelluksesta poistuu
 
+```yaml
 sequenceDiagram
     autonumber
 
@@ -51,4 +52,4 @@ sequenceDiagram
 
     API-->>App: JSON response\n(item details + prediction)
     App-->>User: Displays recognized item\nand saves history locally (SQLite)
-
+```
