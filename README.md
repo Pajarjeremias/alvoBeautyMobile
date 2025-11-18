@@ -32,24 +32,39 @@ Yksi Firebasen monista tietokanta malleista, tähän pystyy päivittämään tie
 sequenceDiagram
     autonumber
 
-    participant User as User
-    participant App as React Native App (Expo)
-    participant CAM as Camera / Image Picker
-    participant API as FastAPI Backend (Rahti)
-    participant ML as ML Inference (PyTorch)
-    participant DB as SQLite Database
+    participant U as Käyttäjä
+    participant FE as Expo Frontend (Mobile)
+    participant BE as FastAPI Backend (Rahti)
+    participant AI as AI_Model (open_clip + torch)
+    participant DB as SQLite /workspace/varustevahti.db
 
-    User->>App: Opens Add Item screen
-    App->>CAM: Launch camera / image picker
-    CAM-->>App: Returns selected image
+    %% --- Normaali CRUD ---
+    U ->> FE: Käyttäjä avaa sovelluksen
+    FE ->> BE: GET /items/
+    BE ->> DB: Hae kaikki itemit
+    DB -->> BE: Item-lista
+    BE -->> FE: 200 OK + JSON
+    FE -->> U: Näyttää listan
 
-    App->>API: POST /upload-image\n(axios, multipart/form-data)
-    API->>ML: Run inference on image
-    ML-->>API: Predicted item category/results
+    %% --- Uuden itemin lisäys ---
+    U ->> FE: Täyttää itemin tiedot
+    FE ->> BE: POST /items/
+    BE ->> DB: Lisää uusi item
+    DB -->> BE: OK
+    BE -->> FE: 200 OK
 
-    API->>DB: Save item + recognition history
-    DB-->>API: Confirm saved
+    %% --- Kuvantunnistus (items/auto) ---
+    U ->> FE: Valitsee kuvan (kamera / galleria)
+    FE ->> BE: POST /items/auto (multipart image)
 
-    API-->>App: JSON response\n(item details + prediction)
-    App-->>User: Displays recognized item\nand saves history locally (SQLite)
+    BE ->> AI: Aktivoi open_clip -mallin<br>Kirjoittaa cacheen /workspace/.cache/torch
+    AI ->> AI: Suorittaa mallin inferenssin
+    AI -->> BE: Ennuste (category, gear-type)
+
+    BE ->> DB: Tallentaa automaattisesti luodut tiedot
+    DB -->> BE: OK
+    BE -->> FE: 200 OK + ennustettu data
+
+    FE -->> U: Näyttää automaattisesti tunnistetun varusteen
+
 ```
